@@ -117,6 +117,13 @@ function item_actions(_this, key) {
         // Call a function to load or update the list based on the remarks
         load_list();
     });
+    _this.find('.cname').on('change input', function() {
+        if (!!listed[key]) {
+            listed[key].cname = $(this).val()
+            localStorage.setItem('listed', JSON.stringify(listed))
+        }
+        load_list()
+    })
     
 }
 
@@ -246,7 +253,8 @@ $(function() {
         var width = _this.find('[name="width"]').val()
         var qty = _this.find('[name="qty"]').val()
         var remarks = _this.find('[name="remarks"]').val()
-        listed[listed.length] = { product: product, price: price,length1:length1, width:width, remarks:remarks, qty: qty }
+        var cname = _this.find('[name="cname"]').val()
+        listed[listed.length] = { product: product, price: price,length1:length1, width:width, remarks:remarks, qty: qty}
         localStorage.setItem('listed', JSON.stringify(listed))
         _this[0].reset()
         _this.find('[name="name"]').val('')
@@ -323,6 +331,7 @@ $(function() {
                         parseFloat(listed[k].width) >= 109 && parseFloat(listed[k].width) <= 120 ? 10 :
                         parseFloat(listed[k].width) >= 121 && parseFloat(listed[k].width) <= 133 ? 11 : 0).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 0, minimumFractionDigits: 0 })) + '</div>')
                         el.find('#product-list').append('<div class="col-6 text-start">' + (listed[k].remarks).toLocaleString('en-US') + '</div>')
+                        // el.find('#product-list').append('<p>' + (listed[k].cname).toLocaleString('en-US') + 'p')
                     })
 
 // + (parseFloat(listed[k].price).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }))
