@@ -60,7 +60,7 @@ if(isset($message)){
 }
 
 ?>
-   
+   <a href="index.html" class="btn btn-link" style="position: absolute; left: 0;margin: 2px;">Go To Index Page</a>
 <div class="container">
 
    <div class="admin-product-form-container">
@@ -84,7 +84,7 @@ if(isset($message)){
       <table class="product-display-table">
          <thead>
          <tr>
-            <!-- <th>product image</th> -->
+           
             <th>product name</th>
             <th>product price</th>
             <th>action</th>
@@ -92,7 +92,7 @@ if(isset($message)){
          </thead>
          <?php while($row = mysqli_fetch_assoc($select)){ ?>
          <tr>
-            <!-- <td><img src="uploaded_img/" height="100" alt=""></td> -->
+           
             <td><?php echo $row['name']; ?></td>
             <td>$<?php echo $row['price']; ?>/-</td>
             <td>

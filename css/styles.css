@@ -5,18 +5,18 @@ body {
 }
 
 main {
-    padding: 1em 0;
+    padding: 0.05em 0;
 }
 
 main * {
-    font-family: Comic Sans MS;
+    font-family: Open Sans;
 }
 
 #project-title {
     text-shadow: 3px 3px 7px #000;
-    padding: 0.05em 1em !important;
+    /* padding: 0.05em 1em !important; */
     color: white;
-    font-size: 2em;
+    font-size: 1em;
     padding-bottom: 0.1em !important;
 }
 

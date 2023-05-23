@@ -34,8 +34,9 @@ function product_actions(_this, data) {
 }
 
 function update_total() {
-    $('#total-amount').text(parseFloat(total).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }))
-    $('#checkout-amount').val(parseFloat(total).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }))
+    var formattedTotal = parseFloat(total).toFixed(0);
+    $('#total-amount').text(formattedTotal);
+    $('#checkout-amount').val(formattedTotal);
 }
 
 function load_products() {
@@ -281,7 +282,7 @@ $(function() {
                 success: function(resp) {
                     var el = $('<div>')
                     el.html(resp)
-                    el.find('#r-total').text(parseFloat(total).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }))
+                    el.find('#r-total').text(parseFloat(total).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 0, minimumFractionDigits: 0 }))
                     // el.find('#r-tendered').text(parseFloat(parseFloat(total) + parseFloat(change)).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }))
                     // el.find('#r-change').text(parseFloat(change).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }))
                     Object.keys(listed).map((k) => {
@@ -320,7 +321,7 @@ $(function() {
                         parseFloat(listed[k].width) >= 85 && parseFloat(listed[k].width) <= 96.9 ? 8 :
                         parseFloat(listed[k].width) >= 97 && parseFloat(listed[k].width) <= 108 ? 9 :
                         parseFloat(listed[k].width) >= 109 && parseFloat(listed[k].width) <= 120 ? 10 :
-                        parseFloat(listed[k].width) >= 121 && parseFloat(listed[k].width) <= 133 ? 11 : 0).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 })) + '</div>')
+                        parseFloat(listed[k].width) >= 121 && parseFloat(listed[k].width) <= 133 ? 11 : 0).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 0, minimumFractionDigits: 0 })) + '</div>')
                         el.find('#product-list').append('<div class="col-6 text-start">' + (listed[k].remarks).toLocaleString('en-US') + '</div>')
                     })
 
