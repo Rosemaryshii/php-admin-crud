@@ -244,26 +244,34 @@ $(function() {
 
     })
     $('#add-form').submit(function(e) {
-        e.preventDefault()
-        start_loader()
-        var _this = $(this)
-        var product = _this.find('[name="name"]').val()
-        var price = _this.find('[name="price"]').val()
-        var length1 = _this.find('[name="length1"]').val()
-        var width = _this.find('[name="width"]').val()
-        var qty = _this.find('[name="qty"]').val()
-        var remarks = _this.find('[name="remarks"]').val()
-        
-        listed[listed.length] = { product: product, price: price,length1:length1, width:width, remarks:remarks, qty: qty}
-        localStorage.setItem('listed', JSON.stringify(listed))
-        _this[0].reset()
-        _this.find('[name="name"]').val('')
-        _this.find('[name="price"]').val('')
-        $('#pname').text('')
-        $('#pprice').text('')
-        load_list()
-        end_loader()
-    })
+        e.preventDefault();
+        start_loader();
+        var _this = $(this);
+        var product = _this.find('[name="name"]').val();
+        var price = _this.find('[name="price"]').val();
+        var length1 = _this.find('[name="length1"]').val();
+        var width = _this.find('[name="width"]').val();
+        var qty = _this.find('[name="qty"]').val();
+        var remarks = _this.find('[name="remarks"]').val();
+      
+        // Store the selected product name and price
+        var selectedProduct = $('#pname').text();
+        var selectedPrice = $('#pprice').text();
+      
+        // Add the selected product name and price to the listed array
+        listed[listed.length] = { product: selectedProduct, price: selectedPrice, length1: length1, width: width, remarks: remarks, qty: qty };
+        localStorage.setItem('listed', JSON.stringify(listed));
+      
+        // Reset only the other form fields
+        _this.find('[name="length1"]').val('');
+        _this.find('[name="width"]').val('');
+        _this.find('[name="qty"]').val('');
+        _this.find('[name="remarks"]').val('');
+      
+        load_list();
+        end_loader();
+      });
+      
 
     $('#checkout').click(function() {
         $('#checkoutModal').modal('show')
