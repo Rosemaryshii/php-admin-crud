@@ -12,6 +12,32 @@
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Phone number validation regex pattern
+        var phoneRegex = /^\d{10}$/;
+  
+        // Function to validate the phone number input
+        function validatePhoneNumber(phoneNumber) {
+          return phoneRegex.test(phoneNumber);
+        }
+  
+        // Event listener for the input field
+        $('#cphone').on('input', function() {
+          var phoneNumber = $(this).val();
+  
+          if (validatePhoneNumber(phoneNumber)) {
+            // Valid phone number
+            $(this).removeClass('is-invalid');
+            $(this).addClass('is-valid');
+          } else {
+            // Invalid phone number
+            $(this).removeClass('is-valid');
+            $(this).addClass('is-invalid');
+          }
+        });
+      });
+    </script>
   </head>
 
   <body class="bg-gradient bg-dark bg-opacity-50">
@@ -142,7 +168,7 @@
             <div class="card rounded-5 shadow mb-3">
               <div class="card-body">
                 <div class="container-fluid row">
-                  <h4 class="text-left fw-bold col-md-6">Total</h4>
+                  <h4 class="text-left fw-bold col-md-6">Total Ksh:</h4>
                   
                   <h3 class="fw-bolder text-right col-md-6" id="total-amount">0</h3>
                   
