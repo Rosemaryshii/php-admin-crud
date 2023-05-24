@@ -12,12 +12,14 @@ main * {
     font-family: Open Sans;
 }
 
+
 #project-title {
     text-shadow: 3px 3px 7px #000;
     /* padding: 0.05em 1em !important; */
-    color: white;
+    color: rgb(246, 245, 247);
     font-size: 1em;
     padding-bottom: 0.1em !important;
+
 }
 
 
@@ -75,8 +77,17 @@ main * {
     z-index: 2;
 }
 
+
 #product-result:empty:after {
     content: "No Result";
     width: 100%;
     text-align: center;
 }
+#item-list {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }
+  #ee1 {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }

@@ -40,7 +40,7 @@
     </script>
   </head>
 
-  <body class="bg-gradient bg-dark bg-opacity-50">
+  <body class="bg-gradient bg-blue bg-opacity-10">
     <a href="admin_page.php" class="btn btn-link" style="position: absolute; right: 0;">Link</a>
 
     <script>
@@ -55,7 +55,7 @@
       <div class="container-fluid w-100">
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-            <div class="card rounded-5 shadow mb-3">
+            <div class="card rounded-5 shadow-lg mb-3">
               <div class="card-body">
                 <div class="container-fluid">
                   <!-- <h4 class="text-center fw-bold">Add Product Item</h4>
@@ -165,7 +165,7 @@
                 </div>
               </div>
             </div>
-            <div class="card rounded-5 shadow mb-3">
+            <div class="card rounded-5 shadow-lg mb-3">
               <div class="card-body">
                 <div class="container-fluid row">
                   <h4 class="text-left fw-bold col-md-6">Total Ksh:</h4>
@@ -186,16 +186,16 @@
             </div>
           </div>
           <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-            <div class="card rounded-5 shadow">
+            <div class="card rounded-5 shadow-lg">
               
              
 
               <div class="card-body">
                 <div class="w-100 overflow-auto">
                   <table
-                    class="table table-stripped table-bordered"
+                    class="table table-stripped table-border"
                     id="item-list"
-                  > <div class="row">
+                  > <div class="row pb-3">
                     <div class="col-md-1">
                       <div class="form-group">
                         <label class="control-label" for="cphone">Phone</label>
@@ -247,8 +247,8 @@
                       <col width="20%" />
                     </colgroup>
                     <thead>
-                      <tr class="bg-primary bg-gradient text-light">
-                        <th></th>
+                      <tr class="bg-white bg-gradient text-dark">
+                        <th id="ee1"></th>
                         <th>QTY</th>
                         <th>Product</th>
                         <th>Price</th>
@@ -258,7 +258,7 @@
                         <th>Remarks</th>
                       </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="table-border" id="eee" ></tbody>
                   </table>
                 </div>
                 <div class="d-none" id="noItem">
