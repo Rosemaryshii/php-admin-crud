@@ -303,19 +303,14 @@ $(function() {
                     var cnameValue = $('#cname').val();
                     var cinvoiceValue = $('#cinvoice').val();
                     var cphoneValue = $('#cphone').val();
-  // Create a new row for the cname value
-  
-                    // el.find('#r-tendered').text(parseFloat(parseFloat(total) + parseFloat(change)).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }))
-                    // el.find('#r-change').text(parseFloat(change).toLocaleString('en-US', { style: 'decimal', maximumFractionDigits: 2, minimumFractionDigits: 2 }))
+ 
                     Object.keys(listed).map((k) => {
-                        // el.find('#product-list1').before(cnameRow);.text(cnameValue);
-                       // Append cnameValue with label to #cname-value div
-// Append cnameValue with label to #cname-value div
+                        
 if (!appendedValues) {
 el.find('#cname-value').append('<div class="col-4 text-start"><label for="cinvoice">Invoice:</label> ' + cinvoiceValue + '</div>');
 el.find('#cname-value').append('<div class="col-4 text-start"><label for="cname">Name:</label> ' + cnameValue + '</div>');
 el.find('#cname-value').append('<div class="col-4 text-start"><label for="cname">Phone No:</label> ' + cphoneValue + '</div>');
-appendedValues = true; // Set the flag to true indicating that the values have been appended
+appendedValues = true; 
         }
 
 
