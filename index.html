@@ -13,27 +13,27 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/script.js"></script>
     <script>
-      $(document).ready(function() {
+      $(document).ready(function () {
         // Phone number validation regex pattern
-        var phoneRegex = /^\d{10}$/;
-  
+        var phoneRegex = /^(\+254\d{9}|\d{10})$/;
+
         // Function to validate the phone number input
         function validatePhoneNumber(phoneNumber) {
           return phoneRegex.test(phoneNumber);
         }
-  
+
         // Event listener for the input field
-        $('#cphone').on('input', function() {
+        $("#cphone").on("input", function () {
           var phoneNumber = $(this).val();
-  
+
           if (validatePhoneNumber(phoneNumber)) {
             // Valid phone number
-            $(this).removeClass('is-invalid');
-            $(this).addClass('is-valid');
+            $(this).removeClass("is-invalid");
+            $(this).addClass("is-valid");
           } else {
             // Invalid phone number
-            $(this).removeClass('is-valid');
-            $(this).addClass('is-invalid');
+            $(this).removeClass("is-valid");
+            $(this).addClass("is-invalid");
           }
         });
       });
@@ -41,16 +41,19 @@
   </head>
 
   <body class="bg-gradient bg-blue bg-opacity-10">
-    <a href="admin_page.php" class="btn btn-link" style="position: absolute; right: 0;">Link</a>
+    <a
+      href="admin_page.php"
+      class="btn btn-link"
+      style="position: absolute; right: 0"
+      >Link</a
+    >
 
     <script>
       start_loader();
     </script>
     <main>
       <div class="col-lg-12">
-        <h1 class="fw-bolder text-center" id="project-title">
-          Billing System
-        </h1>
+        <h1 class="fw-bolder text-center" id="project-title">Billing System</h1>
       </div>
       <div class="container-fluid w-100">
         <div class="row">
@@ -81,18 +84,54 @@
                       ></div>
                     </div>
                     <dl class="row">
-                      <dt class="col-sm-4">Product:</dt>
-                      <dd id="pname" class="col-sm-8 ps-3"></dd>
-                      <dt class="col-sm-4">Price:</dt>
-                      <dd id="pprice" class="col-sm-8 ps-3"></dd>
+                      <dt class="col-sm-5">Product:</dt>
+                      <dd id="pname" class="col-sm-7 ps-3"></dd>
+                      <dt class="col-sm-8">Price Per SQR Feet:</dt>
+                      <dd id="pprice" class="col-sm-2 ps-3"></dd>
                     </dl>
-                    <div class="row">
-                      <div class="col-md-3">
+
+                    <div class="form-group row">
+                      <label class="col-md-5 col-form-label" for="length1"
+                        >Length In Inches</label
+                      >
+                      <div class="col-md-7 my-2">
+                        <input
+                          type="text"
+                          id="length1"
+                          name="length1"
+                          pattern="^\d+\.?\d*$"
+                          title="Please enter a valid number"
+                          class="form-control form-control-sm rounded-5"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-md-5 col-form-label" for="width"
+                        >Width In Inches</label
+                      >
+                      <div class="col-md-7">
+                        <input
+                          type="text"
+                          id="width"
+                          name="width"
+                          pattern="^\d+\.?\d*$"
+                          title="Please enter a valid number"
+                          class="form-control form-control-sm rounded-0 my-2"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-md-5">
                         <div class="form-group">
-                          <label class="control-label" for="qty">QTY</label>
+                          <label class="control-label" for="qty"
+                            >Quantity</label
+                          >
                         </div>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-7 my-2">
                         <div class="form-group text-end">
                           <input
                             type="number"
@@ -105,43 +144,12 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="form-group row">
-                      <label class="col-md-3 col-form-label" for="length1">Length</label>
-                      <div class="col-md-9 my-2">
-                        <input
-                          type="text"
-                          id="length1"
-                          name="length1"
-                          pattern="^\d+\.?\d*$"
-                          title="Please enter a valid number"
-                          class="form-control form-control-sm rounded-5"
-                          required
-                        />
-                      </div>
-                    </div>
-                    
-                    
-                      
-                    <div class="form-group row">
-                      <label class="col-md-3 col-form-label" for="width">Width</label>
-                      <div class="col-md-9">
-                        <input
-                          type="text"
-                          id="width"
-                          name="width"
-                          pattern="^\d+\.?\d*$"
-                          title="Please enter a valid number"
-                          class="form-control form-control-sm rounded-0 my-2"
-                          required
-                        />
-                      </div>
-                    </div>
-                    
-                    
-                    <div class="form-group row">
-                      <label class="col-md-3 col-form-label" for="remarks">Remarks</label>
-                      <div class="col-md-9">
+                      <label class="col-md-5 col-form-label" for="remarks"
+                        >Remarks</label
+                      >
+                      <div class="col-md-7">
                         <input
                           type="text"
                           id="remarks"
@@ -150,7 +158,6 @@
                         />
                       </div>
                     </div>
-                    
                   </form>
                   <hr />
                   <div class="text-end">
@@ -169,9 +176,11 @@
               <div class="card-body">
                 <div class="container-fluid row">
                   <h4 class="text-left fw-bold col-md-6">Total Ksh:</h4>
-                  
-                  <h3 class="fw-bolder text-right col-md-6" id="total-amount">0</h3>
-                  
+
+                  <h3 class="fw-bolder text-right col-md-6" id="total-amount">
+                    0
+                  </h3>
+
                   <div class="text-center">
                     <button
                       class="btn btn-sm btn-light border rounded-5 bg-gradient"
@@ -187,60 +196,61 @@
           </div>
           <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <div class="card rounded-5 shadow-lg">
-              
-             
-
               <div class="card-body">
                 <div class="w-100 overflow-auto">
                   <table
                     class="table table-stripped table-border"
                     id="item-list"
-                  > <div class="row pb-3">
-                    <div class="col-md-1">
-                      <div class="form-group">
-                        <label class="control-label" for="cphone">Phone</label>
+                  >
+                    <div class="row pb-3">
+                      <div class="col-md-1">
+                        <div class="form-group">
+                          <label class="control-label" for="cname">Name</label>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <input
+                          type="text"
+                          id="cname"
+                          name="cname"
+                          class="form-control form-control-sm rounded-5"
+                        />
+                      </div>
+                      <div class="col-md-1">
+                        <div class="form-group">
+                          <label class="control-label" for="cphone"
+                            >Phone</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <input
+                          type="text"
+                          id="cphone"
+                          name="cphone"
+                          class="form-control form-control-sm rounded-5"
+                        />
+                      </div>
+                      <div class="col-md-1">
+                        <div class="form-group">
+                          <label class="control-label" for="cinvoice"
+                            >Invoice</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <input
+                          type="text"
+                          id="cinvoice"
+                          name="cinvoice"
+                          class="form-control form-control-sm rounded-5" required
+                        />
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <input
-                        type="text"
-                        id="cphone"
-                        name="cphone"
-                        class="form-control form-control-sm rounded-5"
-                      />
-                    </div>
-                    <div class="col-md-1">
-                      <div class="form-group">
-                        <label class="control-label" for="cname">Name</label>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <input
-                        type="text"
-                        id="cname"
-                        name="cname"
-                        class="form-control form-control-sm rounded-5"
-                      />
-                    </div>
-                    <div class="col-md-1">
-                      <div class="form-group">
-                        <label class="control-label" for="cinvoice">Invoice</label>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <input
-                        type="text"
-                        id="cinvoice"
-                        name="cinvoice"
-                        class="form-control form-control-sm rounded-5"
-                      />
-                    </div>
-                  </div>
                     <colgroup>
                       <col width="3%" />
-                      <col width="7%" />
                       <col width="35%" />
-                      <col width="5%" />
+                      <col width="7%" />
                       <col width="10%" />
                       <col width="10%" />
                       <col width="10%" />
@@ -249,16 +259,16 @@
                     <thead>
                       <tr class="bg-white bg-gradient text-dark">
                         <th id="ee1"></th>
-                        <th>QTY</th>
                         <th>Product</th>
-                        <th>Price</th>
+                        <!-- <th type="hidden">Price</th> -->
                         <th>Length</th>
                         <th>Width</th>
+                        <th>QTY</th>
                         <th>Total</th>
                         <th>Remarks</th>
                       </tr>
                     </thead>
-                    <tbody class="table-border" id="eee" ></tbody>
+                    <tbody class="table-border" id="eee"></tbody>
                   </table>
                 </div>
                 <div class="d-none" id="noItem">
@@ -306,10 +316,8 @@
                     readonly
                   />
                 </div>
-                
-                <div class="form-group">
-                  
-                </div>
+
+                <div class="form-group"></div>
               </form>
             </div>
           </div>
@@ -353,21 +361,24 @@
           <i class="fa fa-times"></i>
         </button>
       </td>
+
+      <td class="item-name">Item</td>
+      <!-- <td class="text-end item-price" type="hidden">0.00</td> -->
+      <td class="text-end length1" id="original-length">0</td>
+      <td class="text-end width" id="original-width">0</td>
       <td class="text-center">
         <input
           type="number"
           class="form-control form-control-sm rounded-0 border-0 border-bottom qty text-center"
         />
       </td>
-      <td class="item-name">Item</td>
-      <td class="text-end item-price">0.00</td>
-      <td class="text-end length1" id="original-length">0</td>
-      <td class="text-end width" id="original-width">0</td>
-      <td class="text-end item-total">0.00</td>
-      <td class="text-center"><input
-        type="text"
-        class="form-control form-control-sm rounded-0 border-0 border-bottom remarks text-center"
-      /></td>
+      <td class="text-start item-total">0.00</td>
+      <td class="text-center">
+        <input
+          type="text"
+          class="form-control form-control-sm rounded-0 border-0 border-bottom remarks text-center"
+        />
+      </td>
     </tr>
   </noscript>
 </html>
