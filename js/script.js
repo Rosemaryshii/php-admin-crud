@@ -40,9 +40,14 @@ function product_actions(_this, data) {
 }
 
 function update_total() {
-  var formattedTotal = parseFloat(total).toFixed(0);
+  var formattedTotal = parseFloat(total).toLocaleString("en-US", {
+    style: "decimal",
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+  });
+
   $("#total-amount").text(formattedTotal);
-  $("#checkout-amount").val(formattedTotal);
+  $("#checkout-amount").text(formattedTotal);
 }
 
 function load_products() {
@@ -280,63 +285,65 @@ function load_list() {
               }))
 
       total += Math.trunc(
-        parseFloat(listed[k].price) *
-          parseFloat(listed[k].qty) *
-          (parseFloat(listed[k].length1) >= 1 &&
-          parseFloat(listed[k].length1) <= 6.9
-            ? 0.5
-            : parseFloat(listed[k].length1) >= 7 &&
-              parseFloat(listed[k].length1) <= 8.9
-            ? 0.75
-            : parseFloat(listed[k].length1) >= 9 &&
-              parseFloat(listed[k].length1) <= 12.4
-            ? 1
-            : parseFloat(listed[k].length1) >= 12.5 &&
-              parseFloat(listed[k].length1) <= 15.4
-            ? 1.25
-            : parseFloat(listed[k].length1) >= 15.5 &&
-              parseFloat(listed[k].length1) <= 18.9
-            ? 1.5
-            : parseFloat(listed[k].length1) >= 19 &&
-              parseFloat(listed[k].length1) <= 24.9
-            ? 2.15
-            : parseFloat(listed[k].length1) >= 25 &&
-              parseFloat(listed[k].length1) <= 30.9
-            ? 2.75
-            : parseFloat(listed[k].length1) >= 31 &&
-              parseFloat(listed[k].length1) <= 38.9
-            ? 3
-            : parseFloat(listed[k].length1) >= 39 &&
-              parseFloat(listed[k].length1) <= 42.9
-            ? 3.5
-            : parseFloat(listed[k].length1) >= 43 &&
-              parseFloat(listed[k].length1) <= 48.9
-            ? 4
-            : parseFloat(listed[k].length1) >= 49 &&
-              parseFloat(listed[k].length1) <= 54.9
-            ? 4.5
-            : parseFloat(listed[k].length1) >= 55 &&
-              parseFloat(listed[k].length1) <= 65.9
-            ? 5.5
-            : parseFloat(listed[k].length1) >= 66 &&
-              parseFloat(listed[k].length1) <= 72.9
-            ? 6
-            : parseFloat(listed[k].length1) >= 73 &&
-              parseFloat(listed[k].length1) <= 84.9
-            ? 7
-            : parseFloat(listed[k].length1) >= 85 &&
-              parseFloat(listed[k].length1) <= 96.9
-            ? 8
-            : parseFloat(listed[k].length1) >= 97 &&
-              parseFloat(listed[k].length1) <= 108
-            ? 9
-            : parseFloat(listed[k].length1) >= 109 &&
-              parseFloat(listed[k].length1) <= 120
-            ? 10
-            : parseFloat(listed[k].length1) >= 121 &&
-              parseFloat(listed[k].length1) <= 133
-            ? 11
-            : 0) *
+        parseFloat(
+          parseFloat(listed[k].price) *
+            parseFloat(listed[k].qty) *
+            (parseFloat(listed[k].length1) >= 1 &&
+            parseFloat(listed[k].length1) <= 6.9
+              ? 0.5
+              : parseFloat(listed[k].length1) >= 7 &&
+                parseFloat(listed[k].length1) <= 8.9
+              ? 0.75
+              : parseFloat(listed[k].length1) >= 9 &&
+                parseFloat(listed[k].length1) <= 12.4
+              ? 1
+              : parseFloat(listed[k].length1) >= 12.5 &&
+                parseFloat(listed[k].length1) <= 15.4
+              ? 1.25
+              : parseFloat(listed[k].length1) >= 15.5 &&
+                parseFloat(listed[k].length1) <= 18.9
+              ? 1.5
+              : parseFloat(listed[k].length1) >= 19 &&
+                parseFloat(listed[k].length1) <= 24.9
+              ? 2.15
+              : parseFloat(listed[k].length1) >= 25 &&
+                parseFloat(listed[k].length1) <= 30.9
+              ? 2.75
+              : parseFloat(listed[k].length1) >= 31 &&
+                parseFloat(listed[k].length1) <= 38.9
+              ? 3
+              : parseFloat(listed[k].length1) >= 39 &&
+                parseFloat(listed[k].length1) <= 42.9
+              ? 3.5
+              : parseFloat(listed[k].length1) >= 43 &&
+                parseFloat(listed[k].length1) <= 48.9
+              ? 4
+              : parseFloat(listed[k].length1) >= 49 &&
+                parseFloat(listed[k].length1) <= 54.9
+              ? 4.5
+              : parseFloat(listed[k].length1) >= 55 &&
+                parseFloat(listed[k].length1) <= 65.9
+              ? 5.5
+              : parseFloat(listed[k].length1) >= 66 &&
+                parseFloat(listed[k].length1) <= 72.9
+              ? 6
+              : parseFloat(listed[k].length1) >= 73 &&
+                parseFloat(listed[k].length1) <= 84.9
+              ? 7
+              : parseFloat(listed[k].length1) >= 85 &&
+                parseFloat(listed[k].length1) <= 96.9
+              ? 8
+              : parseFloat(listed[k].length1) >= 97 &&
+                parseFloat(listed[k].length1) <= 108
+              ? 9
+              : parseFloat(listed[k].length1) >= 109 &&
+                parseFloat(listed[k].length1) <= 120
+              ? 10
+              : parseFloat(listed[k].length1) >= 121 &&
+                parseFloat(listed[k].length1) <= 133
+              ? 11
+              : 0)
+        ) *
           (parseFloat(listed[k].width) >= 1 &&
           parseFloat(listed[k].width) <= 6.9
             ? 0.5
@@ -386,12 +393,17 @@ function load_list() {
               parseFloat(listed[k].width) <= 108
             ? 9
             : parseFloat(listed[k].width) >= 109 &&
-              parseFloat(listed[k].width1) <= 120
+              parseFloat(listed[k].width) <= 120
             ? 10
             : parseFloat(listed[k].width) >= 121 &&
               parseFloat(listed[k].width) <= 133
             ? 11
             : 0)
+      ).toLocaleString("en-US", {
+        style: "decimal",
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0,
+      }
       );
       $("#item-list tbody").append(item);
       item_actions(item, k);
@@ -523,7 +535,7 @@ $(function () {
             }
 
             el.find("#product-list").append(
-              '<div class="col-2 text-start lh-1">' +
+              '<div class="col-5 text-start lh-1">' +
                 listed[k].product +
                 "</small></div></div>"
             );
@@ -669,7 +681,7 @@ $(function () {
               ) + "</div>";
 
             el.find("#product-list").append(
-              '<div class="col-6 text-start">' +
+              '<div class="col-3 text-start">' +
                 listed[k].remarks.toLocaleString("en-US") +
                 "</div>"
             );
