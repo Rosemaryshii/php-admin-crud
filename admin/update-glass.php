@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/db-conn.php';
+require_once '../config.php';
 
 if (isset($_POST['update-glass'])) {
   $glassId = $_POST['edit-glass-id'];
@@ -7,16 +7,18 @@ if (isset($_POST['update-glass'])) {
   $glassPrice = $_POST['edit-glass-price'];
 
   // Update the glass in the database
-  $updateQuery = "UPDATE glass SET GlassName = :glassName, price = :glassPrice WHERE id = :glassId";
-  $statement = $db->prepare($updateQuery);
-  $statement->bindValue(':glassName', $glassName);
-  $statement->bindValue(':glassPrice', $glassPrice);
-  $statement->bindValue(':glassId', $glassId);
-  $statement->execute();
+  $updateQuery = "UPDATE products SET name = '$glassName', price = '$glassPrice' WHERE id = '$glassId'";
 
-  // Redirect back to the page where the form is displayed
-  header("Location: all_glass.php");
-  exit();
+  if (mysqli_query($conn, $updateQuery)) {
+    echo "Record updated successfully";
+    // Redirect back to the page where the form is displayed
+    header("Location: all_glass.php");
+    exit();
+  } else {
+    // Error occurred while updating glass, handle the error
+    $errorMessage = "Error updating glass. Please try again.";
+    header("Location: all_glass.php?error=" . urlencode($errorMessage));
+    exit();
+  }
 }
 ?>
-

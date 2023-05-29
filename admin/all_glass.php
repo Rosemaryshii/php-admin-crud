@@ -1,14 +1,12 @@
 <?php
 include 'includes/header.php';
-require_once 'includes/db-conn.php';
+require_once '../config.php';
 
 // Fetch all glasses from the database
-$selectQuery = "SELECT * FROM glass";
-$statement = $db->prepare($selectQuery);
-$statement->execute();
-$glasses = $statement->fetchAll(PDO::FETCH_ASSOC);
+$selectQuery = "SELECT * FROM products";
+$result = mysqli_query($conn, $selectQuery);
+$glasses = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
-
 
 <main id="main" class="main">
 
@@ -22,6 +20,20 @@ $glasses = $statement->fetchAll(PDO::FETCH_ASSOC);
       </ol>
     </nav>
   </div><!-- End Page Title -->
+
+  <?php if (isset($_SESSION['success_message'])): ?>
+    <div class="alert alert-success" role="alert">
+      <?php echo $_SESSION['success_message']; ?>
+    </div>
+    <?php unset($_SESSION['success_message']); ?>
+  <?php endif; ?>
+
+  <?php if (isset($_SESSION['error_message'])): ?>
+    <div class="alert alert-danger" role="alert">
+      <?php echo $_SESSION['error_message']; ?>
+    </div>
+    <?php unset($_SESSION['error_message']); ?>
+  <?php endif; ?>
 
   <section class="section">
     <div class="row">
@@ -43,18 +55,17 @@ $glasses = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($glasses as $index => $glass): ?>
                   <tr>
                     <th scope="row"><?php echo $index + 1; ?></th>
-                    <td><?php echo $glass['GlassName']; ?></td>
+                    <td><?php echo $glass['name']; ?></td>
                     <td><?php echo $glass['price']; ?></td>
                     <td>
                       <button class="btn btn-primary edit-btn btn-sm" data-bs-toggle="modal" data-bs-target="#editglass" data-glass-id="<?php echo $glass['id']; ?>">Edit</button>
-                      <button class="btn btn-danger delete-btn btn-sm hidden" data-bs-toggle="modal" data-bs-target="#deleteModal" data-glass-id="<?php echo $glass['id']; ?>">Delete</button>
+                      <button class="btn btn-danger delete-btn btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-glass-id="<?php echo $glass['id']; ?>">Delete</button>
                     </td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
-
 
             <!-- EDIT MODAL -->
             <div class="modal fade" id="editglass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -101,10 +112,7 @@ $glasses = $statement->fetchAll(PDO::FETCH_ASSOC);
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form action="delete-glass.php" method="POST">
-                      <input type="hidden" name="glass_id" id="delete-glass-id" value="">
-                      <button type="submit" class="btn btn-danger delete-btn btn-sm">Delete</button>
-                    </form>
+                    <button type="button" class="btn btn-danger delete-confirm-btn btn-sm">Delete</button>
                   </div>
                 </div>
               </div>
@@ -118,9 +126,15 @@ $glasses = $statement->fetchAll(PDO::FETCH_ASSOC);
   </section>
 </main><!-- End #main -->
 
+<!-- Delete Form -->
+<form action="delete-glass.php" method="POST" id="delete-form">
+  <input type="hidden" name="glass_id" id="delete-glass-id" value="">
+  <button type="submit" class="btn btn-danger delete-btn btn-sm" style="display: none;">Delete</button>
+</form>
 
 <!-- ======= Footer ======= -->
 <?php include 'includes/footer.php'; ?>
+
 <script>
   $(document).ready(function() {
     // Edit button click event
@@ -132,6 +146,17 @@ $glasses = $statement->fetchAll(PDO::FETCH_ASSOC);
       $('#edit-glass-id').val(glassId);
       $('#edit-glass-name').val(glassName);
       $('#edit-glass-price').val(glassPrice);
+    });
+
+    // Delete button click event
+    $('.delete-btn').click(function() {
+      var glassId = $(this).data('glass-id');
+      $('#delete-glass-id').val(glassId);
+    });
+
+    // Delete confirmation button click event
+    $('.delete-confirm-btn').click(function() {
+      $('#delete-form').submit();
     });
   });
 </script>

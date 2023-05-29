@@ -1,4 +1,6 @@
 <?php
+  // Database connection
+  require_once '../config.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Validate form inputs
   $glassName = $_POST['GlassName'];
@@ -11,15 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
   }
 
-  // Database connection
-  require_once 'includes/db-conn.php';
 
   // Check if the glass name already exists in the database
-  $checkQuery = "SELECT COUNT(*) FROM glass WHERE GlassName = :GlassName";
-  $checkStatement = $db->prepare($checkQuery);
-  $checkStatement->bindParam(':GlassName', $glassName);
-  $checkStatement->execute();
-  $count = $checkStatement->fetchColumn();
+  $checkQuery = "SELECT COUNT(*) FROM products WHERE name = '$glassName'";
+  $checkResult = mysqli_query($conn, $checkQuery);
+  $count = mysqli_fetch_array($checkResult)[0];
 
   if ($count > 0) {
     // Glass name already exists, redirect back to the form with an error message
@@ -29,20 +27,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   // Insert glass data into the database
-  $insertQuery = "INSERT INTO glass (GlassName, price) VALUES (:GlassName, :price)";
-  $insertStatement = $db->prepare($insertQuery);
-  $insertStatement->bindParam(':GlassName', $glassName);
-  $insertStatement->bindParam(':price', $price);
+  $insertQuery = "INSERT INTO products (name, price) VALUES ('$glassName', '$price')";
 
-  if ($insertStatement->execute()) {
+  if (mysqli_query($conn, $insertQuery)) {
     // Glass added successfully, redirect back to the form with a success message
     $SuccesMessage = "Glass added successfully.";
     header("Location: glass.php?success=" . urlencode($SuccesMessage));
+    mysqli_close($conn);
     exit();
   } else {
     // Error occurred while adding glass, redirect back to the form with an error message
     $errorMessage = "Error adding glass. Please try again.";
     header("Location: glass.php?error=" . urlencode($errorMessage));
+    mysqli_close($conn);
     exit();
   }
 } else {
@@ -50,5 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   header("Location: glass.php");
   exit();
 }
-
-?>

@@ -41,17 +41,30 @@
   </head>
 
   <body class="bg-gradient bg-blue bg-opacity-10">
-    <a href="login.php" class="nav-link active" style="position: absolute; right: 0;">ADMIN</a>
+
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-dark p-2 mb-1">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Gohar Glass</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto ">
+
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="login.php">LOGIN</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      </nav>
 
     <script>
       start_loader();
     </script>
     <main>
-      <div class="col-lg-12">
-        <h1 class="fw-bolder text-center" id="project-title">
-          Billing System
-        </h1>
-      </div>
       <div class="container-fluid w-100">
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -104,7 +117,7 @@
                           />
                         </div>
                       </div>
-                    </div>
+                     </div>
                     
                     <div class="form-group row">
                       <label class="col-md-3 col-form-label" for="length1">Length</label>
@@ -219,7 +232,7 @@
                         type="text"
                         id="cname"
                         name="cname"
-                        class="form-control form-control-sm rounded-5"
+                        class="form-control form-control-sm rounded-5" required
                       />
                     </div>
                     <div class="col-md-1">
@@ -232,7 +245,7 @@
                         type="text"
                         id="cinvoice"
                         name="cinvoice"
-                        class="form-control form-control-sm rounded-5"
+                        class="form-control form-control-sm rounded-5" required
                       />
                     </div>
                   </div>

@@ -1,40 +1,31 @@
-<!-- <?php
+<?php
 
-require_once 'includes/db-conn.php';
+require_once '../config.php';
 
-// Check if the request is a POST request
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Check if the request is a POST request and the 'glass_id' parameter is set
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['glass_id'])) {
   // Retrieve the glass ID from the request
-  $glassId = $_POST['id'];
+  $glassId = $_POST['glass_id'];
 
   // Perform the necessary actions to delete the glass from the database
   // Replace the following code with your actual database query or ORM logic
-  $sql = "DELETE FROM glass WHERE id = :glassId";
-  $stmt = $pdo->prepare($sql);
-  $stmt->bindParam(':glassId', $glassId, PDO::PARAM_INT);
-  
-  if ($stmt->execute()) {
+  $deleteQuery = "DELETE FROM products WHERE id = '$glassId'";
+
+  if (mysqli_query($conn, $deleteQuery)) {
     // The glass was successfully deleted
-    $response = [
-      'success' => true,
-      'message' => 'Glass deleted successfully'
-    ];
+    $successMessage = "Glass deleted successfully";
+    header("Location: glass.php?success=" . urlencode($successMessage));
+    exit();
   } else {
     // There was an error deleting the glass
-    $response = [
-      'success' => false,
-      'message' => 'Error deleting glass'
-    ];
+    $errorMessage = "Error deleting glass";
+    header("Location: glass.php?error=" . urlencode($errorMessage));
+    exit();
   }
 } else {
-  // Invalid request method
-  $response = [
-    'success' => false,
-    'message' => 'Invalid request method'
-  ];
+  // Invalid request method or 'glass_id' parameter not set
+  $errorMessage = "Invalid request";
+  header("Location: glass.php?error=" . urlencode($errorMessage));
+  exit();
 }
-
-// Send the JSON response
-header('Content-Type: application/json');
-echo json_encode($response);
-?> -->
+?>
